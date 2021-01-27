@@ -7,7 +7,7 @@ namespace ProjApiProvinciasEjer.Models
 {
     public class Provincia
     {
-        public int Id_Pcia { get; set; }
+        public int Id { get; set; }
         public string Nombre_Pcia { get; set; }
 
         public double Lat_Pcia   { get; set; }

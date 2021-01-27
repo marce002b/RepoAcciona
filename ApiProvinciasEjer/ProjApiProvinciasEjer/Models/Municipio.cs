@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ProjApiProvinciasEjer.Models
 {
-    public class Municipios
+    public class Municipio
     {
-        public int Id_Munic { get; set; }
+        public int Id { get; set; }
         public string Nombre_Munic { get; set; }
     }
 }
