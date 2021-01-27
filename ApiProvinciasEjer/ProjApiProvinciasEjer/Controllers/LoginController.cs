@@ -20,9 +20,13 @@ namespace ProjApiProvinciasEjer.Controllers
 
         // POST api/Login
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] string login)
         {
+            if (login == "Marcelo") return Ok(); //new CreatedAtRouteResult("Login Aceptado",null); 
+            else return BadRequest();
         }
+
+       
 
 
     }
