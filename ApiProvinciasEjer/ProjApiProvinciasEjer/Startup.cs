@@ -42,6 +42,7 @@ namespace ProjApiProvinciasEjer
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
         }
     }
 }
