@@ -53,12 +53,28 @@ namespace ProjApiProvinciasEjer
             app.UseMvc();
 
 
-            //cmj para tener en memoria algunos datos de ejemplo de provincias antes de llamar a la api del gobierno, despues comentar
+            //cmj para tener en memoria algunos datos de ejemplo de paises, provincias antes de llamar a la api del gobierno, despues comentar
+            if (!context.Paises.Any())
+            {
+                context.Paises.AddRange(new List<Pais>()
+                {
+                    new Pais(){Nombre_Pais = "Argentina", Continente="America",  Id = 1 ,Provincias = new List<Provincia>() {new Provincia(){Nombre_Pcia = "Buenos Aires", Lat_Pcia = -34.4323, Lon_Pcia = -58.5556, Id = 1, Municipios_Cant = 2, Municipios = new List<Municipio>() { new Municipio() { Nombre_Munic = "San Isidro" , Id = 1}, new Municipio() { Nombre_Munic = "Lujan" , Id = 2} } }, new Provincia() { Nombre_Pcia = "Mendoza", Id = 2}, new Provincia() { Nombre_Pcia = "Jujuy" , Id = 3} } },
+                    new Pais(){Nombre_Pais = "Chile",  Continente="America", Id = 2  }
+
+
+
+                });
+                context.SaveChanges();
+
+            }
+
             if (!context.Provincias.Any())
             {
                 context.Provincias.AddRange(new List<Provincia>()
                 {
-                    new Provincia(){Nombre_Pcia = "Mendoza", Lat_Pcia =0 }
+                    //new Provincia(){Nombre_Pcia = "Buenos Aires", Lat_Pcia =-34.4323 , Lon_Pcia = -58.5556 , Id = 1,Municipios_Cant = 2 , Municipios = new List<Municipio>() {new Municipio(){Nombre_Munic = "San Isidro"}, new Municipio() { Nombre_Munic = "Lujan" } } },
+                    //new Provincia(){Nombre_Pcia = "Mendoza", Lat_Pcia =-33.4323 , Lon_Pcia = -33.5556 , Id = 2  },
+
 
 
                 });
