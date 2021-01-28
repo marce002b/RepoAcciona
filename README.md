@@ -33,4 +33,5 @@ creacion del ApplicationDbContext con 3 tablas paises municipios y provincias lu
 DIA 4 Jueves 28
 
 Analisis del codigo en startup y agrego el servicio para agregar EF para poder inyectar nuestro ApplicationDbContext a traves de inyeccion de dependencias en nuestros controllers
-Creacion de clases provincia, pais, municipios a modo de ejemplo, creacion y test del context, creacion rutas parciales de api/provincia api/pais y sus respectivos {id}... base en memoria mediante UseInMemoryDatabase , creacion de data dummy en startup aun en memoria, 
+Creacion de clases provincia, pais, municipios a modo de ejemplo, creacion y test del context, creacion rutas parciales de api/provincia api/pais y sus respectivos {id}... base en memoria mediante UseInMemoryDatabase , creacion de data dummy en startup aun en memoria, anulacion de null en datos hijos, usando StringLength acotando campos, analizando ModelState valido, condicional para POST al recibir data de nuevas provincias, recibir un 201 content created en POSTMAN o 404 not found
+
