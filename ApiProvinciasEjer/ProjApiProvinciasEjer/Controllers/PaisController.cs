@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProjApiProvinciasEjer.Models;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,8 @@ namespace ProjApiProvinciasEjer.Controllers
         public IEnumerable<Pais> Get()
         {
             return context.Paises.ToList();
+            //ademas quiero traer todas las pcias
+           // return context.Paises.Include(x => x.Provincias).ToList();
         }
         //cmj aca permito buscar por id un pais con verbo httpget, le pasamos un parametro
         //
@@ -31,7 +34,10 @@ namespace ProjApiProvinciasEjer.Controllers
         public IActionResult GetPaisByID(int Id)
         {
 
-            var pais = context.Paises.FirstOrDefault(x => x.Id == Id);
+            //var pais = context.Paises.FirstOrDefault(x => x.Id == Id);
+            //ademas quiero traer todas las pcias
+            var pais = context.Paises.Include(x => x.Provincias).FirstOrDefault(x => x.Id == Id);
+
             if (pais == null) //si este recurso no existe
 
             {
@@ -71,5 +77,36 @@ namespace ProjApiProvinciasEjer.Controllers
 
             return BadRequest(ModelState);
         }
+
+        //cmj updatear la data
+        [HttpPut("{id}")]
+        public IActionResult Put([FromBody] Pais pais, int id)
+        {
+            if (pais.Id != id)
+            {
+                return BadRequest();
+            }
+
+            context.Entry(pais).State = EntityState.Modified;
+            context.SaveChanges();
+            return Ok();
+        }
+
+        //cmj borrar la data
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var pais = context.Paises.FirstOrDefault(x => x.Id == id);
+
+            if (pais == null)
+            {
+                return NotFound();
+            }
+
+            context.Paises.Remove(pais);
+            context.SaveChanges();
+            return Ok(pais);
+        }
+
     }
 }

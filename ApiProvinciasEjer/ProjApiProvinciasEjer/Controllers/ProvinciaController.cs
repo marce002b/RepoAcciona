@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProjApiProvinciasEjer.Models;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,25 @@ namespace ProjApiProvinciasEjer.Controllers
         public IEnumerable<Provincia> Get()
         {
             return context.Provincias.ToList();
+            //retornar tb los municipios
+            //return context.Provincias.Include(x => x.Municipios).ToList();
+        }
+
+
+        [HttpGet("{Id}", Name = "pciadevuelto")]
+        public IActionResult GetPciaByID(int Id)
+        {
+
+           
+            var pcia = context.Provincias.Include(x => x.Municipios).FirstOrDefault(x => x.Id == Id);
+
+            if (pcia == null) //si este recurso no existe
+
+            {
+                return NotFound();//404 recurso no encontrado gracias a  IActionResult }
+            }
+            return Ok(pcia); // si existe pasamos el pais encontrado como parametro de retorno
+
         }
 
 
@@ -56,6 +76,35 @@ namespace ProjApiProvinciasEjer.Controllers
             }
 
             return BadRequest(ModelState);
+        }
+        //cmj updatear la data
+        [HttpPut("{id}")]
+        public IActionResult Put([FromBody] Pais provincia, int id)
+        {
+            if (provincia.Id != id)
+            {
+                return BadRequest();
+            }
+
+            context.Entry(provincia).State = EntityState.Modified;
+            context.SaveChanges();
+            return Ok();
+        }
+
+        //cmj borrar la data de prov
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var provincia = context.Provincias.FirstOrDefault(x => x.Id == id);
+
+            if (provincia == null)
+            {
+                return NotFound();
+            }
+
+            context.Provincias.Remove(provincia);
+            context.SaveChanges();
+            return Ok(provincia);
         }
     }
 

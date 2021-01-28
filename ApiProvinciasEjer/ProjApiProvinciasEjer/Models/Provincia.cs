@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,9 +21,10 @@ namespace ProjApiProvinciasEjer.Models
 
         public List<Municipio> Municipios { get; set; }
 
-        public int PaisId { get; set; } //cmj propiedades navigacionales de relaciones
 
+        [ForeignKey("Pais")] //esta va a ser una llave foranea para la propiedad navigacional Pais de abajo
+        public int PaisId { get; set; } //cmj esta es una llave foranea , propiedades navigacionales de relaciones
         [JsonIgnore]
-        public Pais Pais { get; set; } //cmj propiedades navigacionales de relaciones
+        public Pais Pais { get; set; } //cmj pq a cada pcia le corresponde un pais, propiedades navigacionales de relaciones
     }
 }
