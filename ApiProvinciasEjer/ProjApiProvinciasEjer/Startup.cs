@@ -68,13 +68,16 @@ namespace ProjApiProvinciasEjer
 
             //comento antes de crear la base de datos, si no cdo corra add-migration al no estar la base de datos creada daria error
 
-            /*
+            
             if (!context.Paises.Any())
             {
+
+                
                 context.Paises.AddRange(new List<Pais>()
                 {
-                    new Pais(){Nombre_Pais = "Argentina", Continente="America",  Id = 1 ,Provincias = new List<Provincia>() {new Provincia(){Nombre_Pcia = "Buenos Aires", Id = 1, Municipios_Cant = 2, Municipios = new List<Municipio>() { new Municipio() { Nombre_Munic = "San Isidro" , Id = 1}, new Municipio() { Nombre_Munic = "Lujan" , Id = 2} } }, new Provincia() { Nombre_Pcia = "Mendoza", Id = 2}, new Provincia() { Nombre_Pcia = "Jujuy" , Id = 3} } },
-                    new Pais(){Nombre_Pais = "Chile",  Continente="America", Id = 2  }
+                    new Pais(){Nombre_Pais = "Argentina", Continente="America" ,Provincias = new List<Provincia>() {new Provincia(){Nombre_Pcia = "Buenos Aires", Municipios_Cant = 2, Municipios = new List<Municipio>() { new Municipio() { Nombre_Munic = "San Isidro" }, new Municipio() { Nombre_Munic = "Lujan" } } }, new Provincia() { Nombre_Pcia = "Mendoza"}, new Provincia() { Nombre_Pcia = "Jujuy" } } },
+                    new Pais(){Nombre_Pais = "Chile",  Continente="America"  },
+                    new Pais(){Nombre_Pais = "Uruguay",  Continente="America"  }
 
 
 
@@ -96,7 +99,7 @@ namespace ProjApiProvinciasEjer
                 context.SaveChanges();
             
             }
-            */
+            
         }
     }
 }
