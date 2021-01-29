@@ -5,15 +5,34 @@ using ProjApiProvinciasEjer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace ProjApiProvinciasEjer.Controllers
 {
+
+
     [Produces("application/json")]
     [Route("api/Provincia")]
     [ApiController]
     public class ProvinciaController : Controller
     {
+        private string BASE_URL = "https://apis.datos.gob.ar/georef/api/provincias?nombre=chaco";
+        public Task<HttpResponseMessage> Find()
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(BASE_URL);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                return client.GetAsync("find");
+            }
+            catch
+            {
+                return null;
+            }
+        }
         private readonly ApplicationDbContext context;
         public ProvinciaController(ApplicationDbContext context)
         {
@@ -41,6 +60,10 @@ namespace ProjApiProvinciasEjer.Controllers
             {
                 return NotFound();//404 recurso no encontrado gracias a  IActionResult }
             }
+
+           
+
+            
             return Ok(pcia); // si existe pasamos el pais encontrado como parametro de retorno
 
         }
