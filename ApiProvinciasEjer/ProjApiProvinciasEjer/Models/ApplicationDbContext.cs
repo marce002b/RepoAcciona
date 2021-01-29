@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,12 @@ using System.Threading.Tasks;
 
 namespace ProjApiProvinciasEjer.Models
 {
-    public class ApplicationDbContext: DbContext 
+    //public class ApplicationDbContext: DbContext
+
+    //cmj esto ahora cambia para agregar las tablas del sistema de usuariios de asp net para ello 
+    //tenemos que heredar de IdentityDbContext y pasarle el parametro de ApplicationUser con esto
+    //podemos agregar una migracion nueva para generar los scripts
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
 
         //este constructor le va a pasar a su padre las opciones q se envien a traves de el
