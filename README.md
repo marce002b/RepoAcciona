@@ -50,3 +50,5 @@ DIA 6 Lunes 1
 
 
 Persistencia,token , login de usuarios registrados en estructura de tablas ej AspNetUsers etc , controllers con esquemas autenticacion  via net core   [Authorize(AuthenticationSchemes soporado via  JwtBearerDefaults
+
+se debe obtener el token via un post a /api/account/Create
