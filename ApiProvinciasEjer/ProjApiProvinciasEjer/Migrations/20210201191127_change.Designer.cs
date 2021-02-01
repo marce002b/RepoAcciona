@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjApiProvinciasEjer.Models;
 
 namespace ProjApiProvinciasEjer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210201191127_change")]
+    partial class change
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,11 +192,9 @@ namespace ProjApiProvinciasEjer.Migrations
 
                     b.Property<int>("ProvinciaId");
 
-                    b.Property<string>("ProvinciaId1");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ProvinciaId1");
+                    b.HasIndex("ProvinciaId");
 
                     b.ToTable("Municipios");
                 });
@@ -221,8 +221,9 @@ namespace ProjApiProvinciasEjer.Migrations
 
             modelBuilder.Entity("ProjApiProvinciasEjer.Models.Provincia", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Municipios_Cant");
 
@@ -306,7 +307,8 @@ namespace ProjApiProvinciasEjer.Migrations
                 {
                     b.HasOne("ProjApiProvinciasEjer.Models.Provincia", "Provincia")
                         .WithMany("Municipios")
-                        .HasForeignKey("ProvinciaId1");
+                        .HasForeignKey("ProvinciaId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ProjApiProvinciasEjer.Models.Provincia", b =>

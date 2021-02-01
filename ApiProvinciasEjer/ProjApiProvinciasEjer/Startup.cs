@@ -95,7 +95,7 @@ namespace ProjApiProvinciasEjer
                 
                 context.Paises.AddRange(new List<Pais>()
                 {
-                    new Pais(){Nombre_Pais = "Argentina", Continente="America" ,Provincias = new List<Provincia>() {new Provincia(){Nombre_Pcia = "Buenos Aires", Municipios_Cant = 2, Municipios = new List<Municipio>() { new Municipio() { Nombre_Munic = "San Isidro" }, new Municipio() { Nombre_Munic = "Lujan" } } }, new Provincia() { Nombre_Pcia = "Mendoza"}, new Provincia() { Nombre_Pcia = "Jujuy" } } },
+                    new Pais(){Nombre_Pais = "Argentina", Continente="America" ,Provincias = new List<Provincia>() {new Provincia(){Nombre = "Buenos Aires", Municipios_Cant = 2, Municipios = new List<Municipio>() { new Municipio() { Nombre_Munic = "San Isidro" }, new Municipio() { Nombre_Munic = "Lujan" } } }, new Provincia() { Nombre = "Mendoza"}, new Provincia() { Nombre = "Jujuy" } } },
                     new Pais(){Nombre_Pais = "Chile",  Continente="America"  },
                     new Pais(){Nombre_Pais = "Uruguay",  Continente="America"  }
 

@@ -15,9 +15,9 @@ namespace ProjApiProvinciasEjer.Models
         {
             Municipios = new List<Municipio>(); //esto es para que no salga null  y salgan corchete []  cada vex que no hay data, hago un ctor con la lista vacia
         }
-        public int Id { get; set; }
+        public string Id { get; set; }
         [StringLength(45)]
-        public string Nombre_Pcia { get; set; }//cmj en caso de largo nombre "Nombre_Pcia": [ "The field Nombre_Pcia must be a string with a maximum length of 45."
+        public string Nombre { get; set; }//cmj en caso de largo nombre "Nombre_Pcia": [ "The field Nombre_Pcia must be a string with a maximum length of 45."
 
         //public double Lat_Pcia   { get; set; }
         //public double Lon_Pcia { get; set; }
@@ -37,7 +37,7 @@ namespace ProjApiProvinciasEjer.Models
         public int PaisId { get; set; } //cmj esta es una llave foranea , propiedades navigacionales de relaciones
         [JsonIgnore]
         public Pais Pais { get; set; } //cmj pq a cada pcia le corresponde un pais, propiedades navigacionales de relaciones
-    }
+    
 
 
     //cmj necesarios para https://apis.datos.gob.ar/georef/api/provincias?nombre=chaco
@@ -60,5 +60,6 @@ namespace ProjApiProvinciasEjer.Models
     public class Parametros
     {
         public string nombre { get; set; }
+    }
     }
 }

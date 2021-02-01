@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+//cmj suppose that you want to build a client application that uses .NET Core's HttpClient class to invoke the Get() and Put() actions. So, first step would be to use these namespaces:
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +17,6 @@ using System.Threading.Tasks;
 namespace ProjApiProvinciasEjer.Controllers
 {
 
-
     [Produces("application/json")]
     [Route("api/Provincia")]
     [ApiController]
@@ -23,21 +25,10 @@ namespace ProjApiProvinciasEjer.Controllers
 
     public class ProvinciaController : Controller
     {
+        private Provincia.Root gobpcia = new Provincia.Root();
         private string BASE_URL = "https://apis.datos.gob.ar/georef/api/provincias?nombre=chaco";
-        public Task<HttpResponseMessage> Find()
-        {
-            try
-            {
-                HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri(BASE_URL);
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                return client.GetAsync("find");
-            }
-            catch
-            {
-                return null;
-            }
-        }
+        private HttpClient client = new HttpClient();
+
         private readonly ApplicationDbContext context;
         public ProvinciaController(ApplicationDbContext context)
         {
@@ -54,22 +45,26 @@ namespace ProjApiProvinciasEjer.Controllers
 
 
         [HttpGet("{Id}", Name = "pciadevuelto")]
-        public IActionResult GetPciaByID(int Id)
+        public async Task<IActionResult> GetPciaByID(string Id)
         {
 
-           
-            var pcia = context.Provincias.Include(x => x.Municipios).FirstOrDefault(x => x.Id == Id);
 
-            if (pcia == null) //si este recurso no existe
+            //si la busco a la provincia de la api de gob .ar uso esto
+            client.BaseAddress = new Uri(BASE_URL);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var result = await GetDataGobAr();
+
+
+            //cmj si la busco de mi base usaria esto
+            //var pcia = context.Provincias.Include(x => x.Municipios).FirstOrDefault(x => x.Id == Id);
+
+            if (gobpcia == null) //si este recurso no existe
 
             {
                 return NotFound();//404 recurso no encontrado gracias a  IActionResult }
             }
 
-           
-
-            
-            return Ok(pcia); // si existe pasamos el pais encontrado como parametro de retorno
+            return Ok(gobpcia); // si existe pasamos el pais encontrado como parametro de retorno
 
         }
 
@@ -121,7 +116,7 @@ namespace ProjApiProvinciasEjer.Controllers
 
         //cmj borrar la data de prov
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             var provincia = context.Provincias.FirstOrDefault(x => x.Id == id);
 
@@ -134,7 +129,26 @@ namespace ProjApiProvinciasEjer.Controllers
             context.SaveChanges();
             return Ok(provincia);
         }
+
+
+        public async Task<string> GetDataGobAr()
+        {
+
+            HttpResponseMessage response = client.GetAsync(BASE_URL).Result;
+            string stringData = response.Content.ReadAsStringAsync().Result;
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                PropertyNameCaseInsensitive = true // this is the point
+            };
+            gobpcia = JsonSerializer.Deserialize<Provincia.Root>(stringData, options);
+
+            return "";
+                
+        }
     }
+
+
 
 }
 
