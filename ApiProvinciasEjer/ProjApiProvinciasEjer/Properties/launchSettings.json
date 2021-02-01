@@ -15,7 +15,8 @@
       "launchUrl": "api/provincia",
       "environmentVariables": {
         "loginvarentorno": "marcelo",
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "Llave_secreta": "AccionaJuryTest requires the SecurityKey.KeySize to be greater than &#x27;128&#x27; bits"
       }
     },
     "ProjApiProvinciasEjer": {

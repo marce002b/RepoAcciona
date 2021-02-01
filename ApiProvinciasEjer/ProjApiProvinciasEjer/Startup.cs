@@ -13,6 +13,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace ProjApiProvinciasEjer
 {
@@ -42,6 +45,21 @@ namespace ProjApiProvinciasEjer
 
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
+            //cmj es para que nos de un 401 al intentar navegar hacia el web api, hasta que se ponga la llave secreta y demas
+
+            //esto es configurar bien nuestro AddJwtBearer con las options para  entonces  validar el token recibido y enviado por el usuario para saber si es valido o no
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience=true,
+                ValidateLifetime=true,
+                ValidateIssuerSigningKey=true,
+                ValidIssuer= "yourdomain.com",
+                ValidAudience= "yourdomain.com",
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Llave_secreta"])),
+                ClockSkew=TimeSpan.Zero
+            }) ;
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -59,6 +77,8 @@ namespace ProjApiProvinciasEjer
 
             app.UseHttpsRedirection();
 
+            //cmj agregado para la autenticacion de usuarios
+            app.UseAuthentication();
 
             app.UseMvc();
 

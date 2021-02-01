@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjApiProvinciasEjer.Models;
@@ -13,6 +15,8 @@ namespace ProjApiProvinciasEjer.Controllers
     [Produces("application/json")]
     [Route("api/Pais")]
     [ApiController]
+    //cmj con esto nuestro esquema de autenticacion sera el de los json webtokens
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class PaisController : Controller
     {
         private readonly ApplicationDbContext context;
