@@ -50,3 +50,19 @@ DIA 6 Lunes 1
 
 
 Persistencia,token , login de usuarios registrados en estructura de tablas ej AspNetUsers etc , controllers con esquemas autenticacion  via net core   [Authorize(AuthenticationSchemes soporado via  JwtBearerDefaults
+
+se debe obtener el token via un post a /api/account/Create y por ahora  no tiene expiracion
+
+el token tendra la forma de:
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImNtanVyeTNAZ21haWwuY29tIiwiVmFsb3IiOiJ3aGF0ZXZlciB5b3Ugd2FudCB0byBwdXQgaGVyZSIsImp0aSI6ImI5YzhjZmEzLTA4YjEtNDJkMi05YWVmLWRlNDJmMTRlMWI2NyIsImV4cCI6MTk3MTk0MjIzNCwiaXNzIjoieW91cmRvbWFpbi5jb20iLCJhdWQiOiJ5b3VyZG9tYWluLmNvbSJ9.8_fjTtF9zIZikgKybE_UdkbLK2_G0seUvR0m-95xUmo
+
+
+y una vez obtenido se puede invocar por ejemplo: https://localhost:44372/api/provincia
+/api/provincia
+/api/pais
+/api/login
+
+TO DO: consumir api desde controller llamando a una nueva clase que obtenga datos de GOB.AR
+ya consuminos a un controller local
+
