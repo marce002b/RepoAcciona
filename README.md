@@ -65,4 +65,26 @@ y una vez obtenido se puede invocar por ejemplo: https://localhost:44372/api/pro
 
 TO DO: consumir api desde controller llamando a una nueva clase que obtenga datos de GOB.AR
 ya consuminos a un controller local
+{
+    "cantidad": 1,
+    "inicio": 0,
+    "parametros": {
+        "nombre": "chaco"
+    },
+    "provincias": [
+        {
+            "id": "22",
+            "nombre": "Chaco",
+            "centroide": {
+                "id": 0,
+                "lat": -26.3864309061226,
+                "lon": -60.7658307438603
+            },
+            "municipios_Cant": 0,
+            "municipios": [],
+            "paisId": 0
+        }
+    ],
+    "total": 1
+}
 
