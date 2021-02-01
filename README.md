@@ -40,3 +40,13 @@ Inicio de estudio de Consumir API en Net Core ver si es o no igual a .NET Framew
 
 
 DIA 5 Viernes 29
+
+
+Avances con base de datos persistente en local sql, ya se persisten los datos y las tablas han sidro creadas , y tambien la tabla de usuarios para el login. se creo ApplicationDbContext y UserInfo para tener los datos de usuario login. hubo problemas con el string de conexion se seteo a Server=(localdb)\\mssqllocaldb
+Se corrigieron los problemas al generar comandos de consola de PM, add-migration y update-database y se crean los datos ok con las identity en off
+
+
+DIA 6 Lunes 1
+
+
+Persistencia,token , login de usuarios registrados en estructura de tablas ej AspNetUsers etc , controllers con esquemas autenticacion  via net core   [Authorize(AuthenticationSchemes soporado via  JwtBearerDefaults
