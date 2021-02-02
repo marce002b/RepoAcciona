@@ -26,7 +26,7 @@ namespace ProjApiProvinciasEjer.Controllers
     public class ProvinciaController : Controller
     {
         private Provincia.Root gobpcia = new Provincia.Root();
-        private string BASE_URL = "https://apis.datos.gob.ar/georef/api/provincias?nombre=chaco";
+        private string BASE_URL = "https://apis.datos.gob.ar/georef/api/provincias";
         private HttpClient client = new HttpClient();
 
         private readonly ApplicationDbContext context;
@@ -52,7 +52,7 @@ namespace ProjApiProvinciasEjer.Controllers
             //si la busco a la provincia de la api de gob .ar uso esto
             client.BaseAddress = new Uri(BASE_URL);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var result = await GetDataGobAr();
+            var result = await GetDataGobAr(Id);
 
 
             //cmj si la busco de mi base usaria esto
@@ -131,10 +131,10 @@ namespace ProjApiProvinciasEjer.Controllers
         }
 
 
-        public async Task<string> GetDataGobAr()
+        public async Task<string> GetDataGobAr(string pcianombre)
         {
 
-            HttpResponseMessage response = client.GetAsync(BASE_URL).Result;
+            HttpResponseMessage response = client.GetAsync(BASE_URL + "?nombre=" + pcianombre).Result;
             string stringData = response.Content.ReadAsStringAsync().Result;
             var options = new JsonSerializerOptions
             {
