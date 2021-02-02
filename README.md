@@ -104,6 +104,6 @@ DIA 8 Miercoles 3 y resto de dias
 
 TO DO:
 
-Tema logs y Test Unitarios
+Tema logs , Test Unitarios y auto documentacion Swagger
 
-Logging API de Microsoft.Extensions.Logging y verifican el comportamiento de un solo método o clase via Test Unitarios 
+Logging API de Microsoft.Extensions.Logging y verifican el comportamiento de un solo método o clase via Test Unitarios . luego Swagger Inspector to automatically generate the OpenAPI file for any end point
