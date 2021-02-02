@@ -52,13 +52,14 @@ namespace ProjApiProvinciasEjer.Controllers
             //si la busco a la provincia de la api de gob .ar uso esto
             client.BaseAddress = new Uri(BASE_URL);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var result = await GetDataGobAr(Id);
+            var result = await GetDataGobAr(Id); ////cmj mando parametro del nombre de pcia solicitado usando async await pq es metodo asincrono  quiero que espere a terminar
+            
 
 
-            //cmj si la busco de mi base usaria esto
-            //var pcia = context.Provincias.Include(x => x.Municipios).FirstOrDefault(x => x.Id == Id);
+                //cmj si la busco de mi base usaria esto
+                //var pcia = context.Provincias.Include(x => x.Municipios).FirstOrDefault(x => x.Id == Id);
 
-            if (gobpcia == null) //si este recurso no existe
+                if (gobpcia == null) //si este recurso no existe
 
             {
                 return NotFound();//404 recurso no encontrado gracias a  IActionResult }
@@ -70,7 +71,7 @@ namespace ProjApiProvinciasEjer.Controllers
 
 
 
-        //CMJ aca enviaremos un nuevo pcia y recibiremos un 201 conted created y devolveremos la pcia creada, todo  via POSTMAN
+        //CMJ aca enviaremos un nuevo pcia y recibiremos un 201 content created y devolveremos la pcia creada, todo  via POSTMAN
         //en mi  ejemplo en la URL https://localhost:44372/api/provincia
         //entramos {"nombre_Pcia":"Salta" , "Id":22}
         //mandaremos eso de arriba  en postman con POST y en Body-RAW-Json  
@@ -131,7 +132,7 @@ namespace ProjApiProvinciasEjer.Controllers
         }
 
 
-        public async Task<string> GetDataGobAr(string pcianombre)
+        public async Task<string> GetDataGobAr(string pcianombre)//cmj recibo parametro del nombre de pcia solicitado en el ejercicio y retorno data q deserealizo en el objeto gobpcia de tipo Provincia.Root
         {
 
             HttpResponseMessage response = client.GetAsync(BASE_URL + "?nombre=" + pcianombre).Result;
