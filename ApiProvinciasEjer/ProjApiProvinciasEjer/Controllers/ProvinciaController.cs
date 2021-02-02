@@ -142,7 +142,7 @@ namespace ProjApiProvinciasEjer.Controllers
                 WriteIndented = true,
                 PropertyNameCaseInsensitive = true // this is the point
             };
-            gobpcia = JsonSerializer.Deserialize<Provincia.Root>(stringData, options);
+            gobpcia = JsonSerializer.Deserialize<Provincia.Root>(stringData, options);//cmj aca lo deserealizo via system.text.json que es nuevo propio de net core , al json de la respuesta stringData en mi objeto  gobpcia. nota q anule las mayusculas de los nombres de propiedades como una opcion 
 
             return "";
                 
