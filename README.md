@@ -68,7 +68,11 @@ y una vez obtenido se puede invocar por ejemplo: https://localhost:44372/api/pro
 DIA 7 Martes 2
 
 Se genera llamado a la api de https://apis.datos.gob.ar/georef/api/provincias dentro del controlador de provincias para cuando se llame mediante POSTMAN con token a la uri
-https://localhost:44372/api/provincia/jujuy o cualquier otra provincia se devuelva.
+/api/provincia/jujuy o cualquier otra provincia se devuelva json..  aca lo deserealizo via system.text.json que es nuevo propio de net core , al json de la respuesta stringData en mi objeto  gobpcia. nota q anule las mayusculas de los nombres de propiedades como una option 
+
+ gobpcia = JsonSerializer.Deserialize<Provincia.Root>(stringData, options);/
+ 
+ el json rta es
 
 
 
@@ -95,3 +99,11 @@ https://localhost:44372/api/provincia/jujuy o cualquier otra provincia se devuel
     "total": 1
 }
 
+
+DIA 8 Miercoles 3 y resto de dias 
+
+TO DO:
+
+Tema logs , Test Unitarios y auto documentacion Swagger
+
+Logging API de Microsoft.Extensions.Logging y verifican el comportamiento de un solo método o clase via Test Unitarios . luego Swagger Inspector to automatically generate the OpenAPI file for any end point
