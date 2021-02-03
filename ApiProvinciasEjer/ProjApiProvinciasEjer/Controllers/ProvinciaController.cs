@@ -93,7 +93,6 @@ namespace ProjApiProvinciasEjer.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 context.Provincias.Add(mipcia);
                 context.SaveChanges();
                 return new CreatedAtRouteResult("paisdevuelto", new { Id = mipcia.Id }, mipcia);
@@ -147,9 +146,6 @@ namespace ProjApiProvinciasEjer.Controllers
             return "";
                 
         }
-    }
-
-
-
+    }   
 }
 
